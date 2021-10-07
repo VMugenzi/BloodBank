@@ -17,6 +17,8 @@ var _bodyParser = _interopRequireDefault(require("body-parser"));
 
 var _hospitalRoute = _interopRequireDefault(require("./Server/Routes/hospitalRoute"));
 
+var _donationRoute = _interopRequireDefault(require("./Server/Routes/donationRoute"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _dotenv["default"].config({
@@ -27,6 +29,7 @@ var app = (0, _express["default"])();
 app.use(_bodyParser["default"].json());
 app.use("/bloodbank/v1/user", _userRoute["default"]);
 app.use("/bloodbank/v1/hospital", _hospitalRoute["default"]);
+app.use("/bloodbank/v1/donation", _donationRoute["default"]);
 var databaseUrl = process.env.DATABASE;
 
 _mongoose["default"].connect(databaseUrl, {

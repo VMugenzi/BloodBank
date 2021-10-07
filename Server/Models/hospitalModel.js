@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const HospitalSchema= new mongoose.Schema({
 
-    hospitalName: String,
+    hospitalName: {type:String, 
+    unique:true},
 
     email: {type:String, 
         require:true,

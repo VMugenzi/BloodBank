@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRouter from "./Server/Routes/userRoute";
 import bodyParser from "body-parser";
 import hospitalRouter from "./Server/Routes/hospitalRoute";
+import donationRouter from "./Server/Routes/donationRoute";
 
 
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 app.use("/bloodbank/v1/user",userRouter);
 app.use("/bloodbank/v1/hospital", hospitalRouter);
+app.use("/bloodbank/v1/donation", donationRouter);
 
 
 const databaseUrl=process.env.DATABASE;

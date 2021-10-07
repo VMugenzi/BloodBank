@@ -1,1 +1,0 @@
-{"version":3,"sources":["hospitalController.js"],"names":["HospitalController"],"mappings":";;;;;;;AAAA;;;;;;IAEMA,kB;;;;eAKSA,kB","sourcesContent":["import HospitalInfo from \"../Models/hospitalModel\";\r\n\r\nclass HospitalController{\r\n\r\n\r\n\r\n}\r\nexport default HospitalController;"],"file":"hospitalController.dev.js"}
