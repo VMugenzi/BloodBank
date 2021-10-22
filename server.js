@@ -3,19 +3,26 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./Server/Routes/userRoute";
 import bodyParser from "body-parser";
-import hospitalRouter from "./Server/Routes/hospitalRoute";
 import donationRouter from "./Server/Routes/donationRoute";
+import cors from "cors";
 
 
 
 dotenv.config({path:'./.env'});
 
 const app=express();
-app.use(bodyParser.json());
 
+app.use(cors());
+app.use(bodyParser.json());
 app.use("/bloodbank/v1/user",userRouter);
-app.use("/bloodbank/v1/hospital", hospitalRouter);
 app.use("/bloodbank/v1/donation", donationRouter);
+app.use('/',(req,res)=>{
+    res.status(404).send({
+    status:404,
+    message:"This Route does not exist"
+})
+})
+
 
 
 const databaseUrl=process.env.DATABASE;

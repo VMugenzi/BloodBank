@@ -15,9 +15,9 @@ var _userRoute = _interopRequireDefault(require("./Server/Routes/userRoute"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
-var _hospitalRoute = _interopRequireDefault(require("./Server/Routes/hospitalRoute"));
-
 var _donationRoute = _interopRequireDefault(require("./Server/Routes/donationRoute"));
+
+var _cors = _interopRequireDefault(require("cors"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -26,10 +26,16 @@ _dotenv["default"].config({
 });
 
 var app = (0, _express["default"])();
+app.use((0, _cors["default"])());
 app.use(_bodyParser["default"].json());
 app.use("/bloodbank/v1/user", _userRoute["default"]);
-app.use("/bloodbank/v1/hospital", _hospitalRoute["default"]);
 app.use("/bloodbank/v1/donation", _donationRoute["default"]);
+app.use('/', function (req, res) {
+  res.status(404).send({
+    status: 404,
+    message: "This Route does not exist"
+  });
+});
 var databaseUrl = process.env.DATABASE;
 
 _mongoose["default"].connect(databaseUrl, {

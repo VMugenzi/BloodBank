@@ -1,0 +1,1 @@
+{"version":3,"sources":["dataChecker.js"],"names":["DataChecker"],"mappings":";;;;;;;AAAA;;;;;;IAEMA,W;;;;eAKSA,W","sourcesContent":["import UserInfo from \"../Models/userModel\";\r\n\r\nclass DataChecker{\r\n\r\n    \r\n\r\n}\r\nexport default DataChecker;"],"file":"dataChecker.dev.js"}
