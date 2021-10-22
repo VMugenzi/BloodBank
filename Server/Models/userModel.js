@@ -1,24 +1,33 @@
 import mongoose from "mongoose";
 
 const UserSchema=new mongoose.Schema({
-firstName:{type:String,
-require:[true, "firstname is required"]
+Name:{type:String,
+require:[true, "name is required"]
 },
-lastName: String,
 
 gender:{type:String,
 enum:["female","male"]},
 
-dob: {type: Date, require:true},
+// dob: {type: Date, require:true},
 
-bloodGroup: String,
+// bloodGroup: {type:String, enum:['O','A','B','AB']},
 
 address: {type: String, required:true},
 
+
 phone: {type:String, require:true},
+
+email: {type:String, 
+    require:true,
+    unique:true
+},
 
 password:{type:String,
 default:12345},
+
+role:{type:String,
+    enum:["user","hospital","admin"],
+    default:"user"},
 
 status:{type:String,
 enum:["active","inactive"]}

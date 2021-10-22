@@ -1,8 +1,16 @@
 import UserInfo from "../Models/userModel";
+import TokenAuth from "../Helpers/tokenAuth";
+import bcrypt from "bcrypt";
 
 class userController {
 
  static signupUser =async(req,res) =>{
+    const saltRound=10;
+    console.log("yolo")
+    const hashPassword=bcrypt.hashSync(req.body.password,saltRound);
+    console.log(hashPassword)
+    req.body.password=hashPassword;
+
     const user=await UserInfo.create(req.body);
     if (!user){
         return res.status(400).json({
@@ -21,19 +29,35 @@ class userController {
 
 
 static signinUser=async (req,res)=>{
-    const {firstName,password}= req.body;
-    const user=await UserInfo.findOne({firstName:firstName, password:password});
+    const {phone,password}= req.body;
+    const user=await UserInfo.findOne({phone:phone});
+  
 if (!user){
     return res.status(404).json({
         status:404,
         message:"user does not exist🤪"
     });
 }
+if (bcrypt.compareSync(password,user.password))
+{   
+    const token=TokenAuth.tokenGenerator({
+        id:user._id,
+        phone:user.phone,
+        status:user.status,
+        role:user.role
+    })
     return res.status(200).json({
         status:200,
         message:"sucessfully logged in 👯‍♀️",
+        token:token,
         data:user
     });
+}
+return res.status(404).json({
+    status: 404,
+    message: "Password is incorrect, Please try again.."
+
+});
 }
 
 static getAllUsers=async(req,res) => {
